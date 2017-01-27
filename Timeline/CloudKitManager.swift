@@ -9,10 +9,10 @@
 import UIKit
 import CloudKit
 
-private let CreatorUserRecordIDKey = "creatorUserRecordID"
-private let LastModifiedUserRecordIDKey = "creatorUserRecordID"
-private let CreationDateKey = "creationDate"
-private let ModificationDateKey = "modificationDate"
+private let creatorUserRecordIDKey = "creatorUserRecordID"
+private let lastModifiedUserRecordIDKey = "lastModifiedUserRecordID"
+private let creationDateKey = "creationDate"
+private let modificationDateKey = "modificationDate"
 
 class CloudKitManager {
     
@@ -140,17 +140,17 @@ class CloudKitManager {
             
             if let record = record {
                 
-                let predicate = NSPredicate(format: "%K == %@", argumentArray: [CreatorUserRecordIDKey, record.recordID])
+                let predicate = NSPredicate(format: "%K == %@", argumentArray: [creatorUserRecordIDKey, record.recordID])
                 
                 self.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil, completion: completion)
             }
         }
     }
     
-    func fetchRecordsFromDateRange(_ type: String, recordType: String, fromDate: Date, toDate: Date, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
+    func fetchRecordsFromDateRange(_ type: String, fromDate: Date, toDate: Date, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
         
-        let startDatePredicate = NSPredicate(format: "%K > %@", argumentArray: [CreationDateKey, fromDate])
-        let endDatePredicate = NSPredicate(format: "%K < %@", argumentArray: [CreationDateKey, toDate])
+        let startDatePredicate = NSPredicate(format: "%K > %@", argumentArray: [creationDateKey, fromDate])
+        let endDatePredicate = NSPredicate(format: "%K < %@", argumentArray: [creationDateKey, toDate])
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startDatePredicate, endDatePredicate])
         
         
